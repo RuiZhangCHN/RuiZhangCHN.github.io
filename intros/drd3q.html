@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>EsCVAE: Learning to Converse Emotionally Like Humans | Rui Zhang (SCUT)</title>
+  <title>DR-D3Q: Dynamic Reward-based Dueling Deep Dyna-Q | Rui Zhang (SCUT)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Emotional intelligence is one of the key parts of human intelligence. Exploring how to endow conversation models with emotional intelligence is a recent research hotspot. Although several emotional">
-<meta property="og:type" content="article">
-<meta property="og:title" content="EsCVAE: Learning to Converse Emotionally Like Humans">
-<meta property="og:url" content="http://yoursite.com/2020/08/25/escvae/index.html">
+  <meta name="description" content="In this paper, we propose a new approach, called Dynamic Reward-based Dueling Deep Dyna-Q (DR-D3Q). The DR-D3Q can learn policies in noise robustly, and it is easy to implement by combining dynamic">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DR-D3Q: Dynamic Reward-based Dueling Deep Dyna-Q">
+<meta property="og:url" content="http://yoursite.com/intros/drd3q.html">
 <meta property="og:site_name" content="Rui Zhang (SCUT)">
-<meta property="og:description" content="Emotional intelligence is one of the key parts of human intelligence. Exploring how to endow conversation models with emotional intelligence is a recent research hotspot. Although several emotional">
+<meta property="og:description" content="In this paper, we propose a new approach, called Dynamic Reward-based Dueling Deep Dyna-Q (DR-D3Q). The DR-D3Q can learn policies in noise robustly, and it is easy to implement by combining dynamic">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/imgs/escvae.png">
-<meta property="article:published_time" content="2020-08-25T07:57:47.814Z">
-<meta property="article:modified_time" content="2020-08-25T07:59:45.291Z">
+<meta property="og:image" content="http://yoursite.com/imgs/dr-d3q.png">
+<meta property="article:published_time" content="2020-08-25T07:52:03.982Z">
+<meta property="article:modified_time" content="2020-08-25T07:52:03.982Z">
 <meta property="article:author" content="Rui Zhang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/imgs/escvae.png">
+<meta name="twitter:image" content="http://yoursite.com/imgs/dr-d3q.png">
   
     <link rel="alternative" href="/atom.xml" title="Rui Zhang (SCUT)" type="application/atom+xml">
   
@@ -142,14 +142,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-escvae" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      EsCVAE: Learning to Converse Emotionally Like Humans
+      DR-D3Q: Dynamic Reward-based Dueling Deep Dyna-Q
     </h1>
   
 
@@ -159,9 +159,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <div align="center">
-<img src="/imgs/escvae.png" width="700" align='center'/>
+<img src="/imgs/dr-d3q.png" width="700" align='center'/>
 </div>
-Emotional intelligence is one of the key parts of human intelligence. Exploring how to endow conversation models with emotional intelligence is a recent research hotspot. Although several emotional conversation approaches have been introduced, none of these methods were able to decide an appropriate emotion category for the response. In this paper, we propose the EsCVAE-I and EsCVAE-II model to learn to automatically specify a reasonable emotion category for response generation. We show that there are some frequent emotion interaction patterns in humans dialogue (e.g. happiness-like, angry-disgust), and our models are able to learn such frequent patterns and apply it to emotional conversation generation. Experiments show that our proposed approaches can generate appropriate emotion and yield significant improvements over the baseline methods in emotional conversation.
+In this paper, we propose a new approach, called Dynamic Reward-based Dueling Deep Dyna-Q (DR-D3Q). The DR-D3Q can learn policies in noise robustly, and it is easy to implement by combining dynamic reward and the Dueling Deep Q-Network (Dueling DQN) into Deep Dyna-Q (DDQ) framework. Unlike typical dialogue reward function, we integrate dynamic reward that provides reward in real-time for agent to make Dueling DQN adapt to dialogue domain. For the purpose of supplementing the limited amount of real user experiences, we take the DDQ framework as the basic framework. Experiments using simulation and human evaluation show that the DR-D3Q significantly improve the performance of policy learning tasks in noisy environments.
       
 
       
@@ -180,25 +180,6 @@ Emotional intelligence is one of the key parts of human intelligence. Exploring 
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/2020/08/25/cdst/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Cross-Domain Sentiment Transfer
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/08/25/mecs/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MECS: Multi-Emotional Conversation System</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -249,7 +230,7 @@ Emotional intelligence is one of the key parts of human intelligence. Exploring 
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
