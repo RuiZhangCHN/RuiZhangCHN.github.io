@@ -8,19 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Rui Zhang (SCUT)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[English version] Cross-Domain Sentiment Transfer   为了解决现有情感生成方法面临的缺乏大规模标注数据的问题，本文提出了一种基于对抗生成网络(GAN)的跨领域文本情感迁移方法，该框架使用跨领域的情感标注数据来协助特定领域情感文本生成模型的训练。通过将对抗性强化学习与监督学习相结合，我们的框架能够学习到情绪风格转换模式并将其应用于情感文本生成。">
+  <meta name="description" content="[English|中文]  Emotional Text Generation Based on Cross-Domain Sentiment Transfer   In recent years, several neural network based emotional text generation methods have been investigated. However,">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rui Zhang (SCUT)">
-<meta property="og:url" content="http://yoursite.com/intros_chn/index.html">
+<meta property="og:url" content="http://yoursite.com/publication/index.html">
 <meta property="og:site_name" content="Rui Zhang (SCUT)">
-<meta property="og:description" content="[English version] Cross-Domain Sentiment Transfer   为了解决现有情感生成方法面临的缺乏大规模标注数据的问题，本文提出了一种基于对抗生成网络(GAN)的跨领域文本情感迁移方法，该框架使用跨领域的情感标注数据来协助特定领域情感文本生成模型的训练。通过将对抗性强化学习与监督学习相结合，我们的框架能够学习到情绪风格转换模式并将其应用于情感文本生成。">
+<meta property="og:description" content="[English|中文]  Emotional Text Generation Based on Cross-Domain Sentiment Transfer   In recent years, several neural network based emotional text generation methods have been investigated. However,">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://yoursite.com/imgs/cdtst.png">
 <meta property="og:image" content="http://yoursite.com/imgs/escvae.png">
 <meta property="og:image" content="http://yoursite.com/imgs/mecs.png">
 <meta property="og:image" content="http://yoursite.com/imgs/dr-d3q.png">
-<meta property="article:published_time" content="2020-08-26T03:52:03.806Z">
-<meta property="article:modified_time" content="2020-08-26T03:52:03.806Z">
+<meta property="article:published_time" content="2020-11-05T02:45:06.132Z">
+<meta property="article:modified_time" content="2020-11-05T02:45:06.132Z">
 <meta property="article:author" content="Rui Zhang">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://yoursite.com/imgs/cdtst.png">
@@ -62,9 +62,9 @@
 		<nav class="header-menu">
 			<ul>
 			
-				<li><a href="/">About</a></li>
+				<li><a href="/">Home</a></li>
 	        
-				<li><a href="/intros">Paper Intro</a></li>
+				<li><a href="/publication">Publications</a></li>
 	        
 			</ul>
 		</nav>
@@ -130,9 +130,9 @@
 				<ul style="width: 50%">
 				
 				
-					<li style="width: 50%"><a href="/">About</a></li>
+					<li style="width: 50%"><a href="/">Home</a></li>
 		        
-					<li style="width: 50%"><a href="/intros">Paper Intro</a></li>
+					<li style="width: 50%"><a href="/publication">Publications</a></li>
 		        
 				</ul>
 			</nav>
@@ -152,27 +152,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><text>   <br></text><br>[<a href="/intros">English version</a>]</p>
-<h2 id="Cross-Domain-Sentiment-Transfer"><a href="#Cross-Domain-Sentiment-Transfer" class="headerlink" title="Cross-Domain Sentiment Transfer"></a>Cross-Domain Sentiment Transfer</h2><div align="center">
+        <p><text>   <br></text></p>
+<p align="right"><b>[English|<a href="/publication_chn">中文</a>]</b></p>
+
+<h2 id="Emotional-Text-Generation-Based-on-Cross-Domain-Sentiment-Transfer"><a href="#Emotional-Text-Generation-Based-on-Cross-Domain-Sentiment-Transfer" class="headerlink" title="Emotional Text Generation Based on Cross-Domain Sentiment Transfer"></a>Emotional Text Generation Based on Cross-Domain Sentiment Transfer</h2><div align="center">
 <img src="/imgs/cdtst.png" width="700" align='center'/>
 </div>
-为了解决现有情感生成方法面临的缺乏大规模标注数据的问题，本文提出了一种基于对抗生成网络(GAN)的跨领域文本情感迁移方法，该框架使用跨领域的情感标注数据来协助特定领域情感文本生成模型的训练。通过将对抗性强化学习与监督学习相结合，我们的框架能够学习到情绪风格转换模式并将其应用于情感文本生成。实验结果表明，我们的方法优于State-of-the-art方法，能够生成高质量的情感文本，同时保持域信息和内容语义的一致性。
+In recent years, several neural network based emotional text generation methods have been investigated. However, existing emotional text generation approaches often suffer from the problem of requiring large-scale annotated data. In order to solve the above problem, this paper propose a GAN-based cross-domain text sentiment transfer model, which uses annotated data from other domains to assist in the training of emotional text generation network. By combining adversarial reinforcement learning with supervised learning, our model is able to extract patterns of sentiment transformation and apply them in emotional text generation. Experimental results have shown that our approach outperforms the state-of-the-art methods, and is able to generate high quality emotional text while maintaining the consistency of domain information and content semantics.
 
-<h2 id="EsCVAE-Learning-to-Converse-Emotionally-Like-Humans"><a href="#EsCVAE-Learning-to-Converse-Emotionally-Like-Humans" class="headerlink" title="EsCVAE: Learning to Converse Emotionally Like Humans"></a>EsCVAE: Learning to Converse Emotionally Like Humans</h2><div align="center">
+<h2 id="Learning-to-Converse-Emotionally-Like-Humans-A-Conditional-Variational-Approach"><a href="#Learning-to-Converse-Emotionally-Like-Humans-A-Conditional-Variational-Approach" class="headerlink" title="Learning to Converse Emotionally Like Humans: A Conditional Variational Approach"></a>Learning to Converse Emotionally Like Humans: A Conditional Variational Approach</h2><div align="center">
 <img src="/imgs/escvae.png" width="700" align='center'/>
 </div>
-情绪智力是人类智力的关键组成部分之一，探索如何为对话模型赋予情感已成为近年来的研究热点。然而，现有的情感对话方法都无法为响应确定合适的情感类别。在本文中，我们提出了情绪敏感的变分自编码器(Emotion-sensitive Conditional Variational AutoEncoder, EsCVAE)以生成具有合适的情感类型的响应。我们证明了人类对话中存在一些频繁的情感互动模式（例如，喜欢-开心，生气-厌恶），并且我们的模型能够学习这种频繁模式并将其应用于情感对话的产生。 实验表明，我们提出的方法可以产生合适的情绪，并显着改善情感对话的生成质量。
+Emotional intelligence is one of the key parts of human intelligence. Exploring how to endow conversation models with emotional intelligence is a recent research hotspot. Although several emotional conversation approaches have been introduced, none of these methods were able to decide an appropriate emotion category for the response. In this paper, we propose the EsCVAE-I and EsCVAE-II model to learn to automatically specify a reasonable emotion category for response generation. We show that there are some frequent emotion interaction patterns in humans dialogue (e.g. happiness-like, angry-disgust), and our models are able to learn such frequent patterns and apply it to emotional conversation generation. Experiments show that our proposed approaches can generate appropriate emotion and yield significant improvements over the baseline methods in emotional conversation.
 
 
-<h2 id="MECS-Multi-Emotional-Conversation-System"><a href="#MECS-Multi-Emotional-Conversation-System" class="headerlink" title="MECS: Multi-Emotional Conversation System"></a>MECS: Multi-Emotional Conversation System</h2><div align="center">
+<h2 id="Building-Emotional-Conversation-Systems-using-Multi-task-Seq2Seq-Learning"><a href="#Building-Emotional-Conversation-Systems-using-Multi-task-Seq2Seq-Learning" class="headerlink" title="Building Emotional Conversation Systems using Multi-task Seq2Seq Learning"></a>Building Emotional Conversation Systems using Multi-task Seq2Seq Learning</h2><div align="center">
 <img src="/imgs/mecs.png" width="700" align='center'/>
 </div>
-本文介绍了我们为NLPCC 2017情感对话生成技术评测任务设计的系统。我们的模型采用多任务序列到序列(Multi-task Sequence-to-Sequence)学习框架来捕捉对话中的内容信息，并针对每种类型的情绪产生响应。评估结果表明，我们的模型在情绪生成方面具有竞争力，在平均情绪准确度指标达到0.9658。我们还观察了人类对话中的情感互动，并尝试利用心理学中的同理心现象解决对话中的情绪响应问题。最后，我们的模型在总分上达到325，在平均分上达到0.545。 <font color=red>我们的模型在基于生成(Generation-based)方法的评测中获得第一名，并在整个评测任务中获得第三名。</font><font color=blue size=2>注：完整评测任务的前两名均为基于检索的方法(Retrived-based)。</font>
+This paper describes our system designed for the NLPCC 2017 shared task on emotional conversation generation. Our model adopts a multi-task Seq2Seq learning framework to capture the textual information of post sequence and generate responses for each type of emotions simultaneously. Evaluation results suggest that our model is competitive on emotional generation, which achieves 0.9658 on average emotion accuracy. We also observe the emotional interaction in human conversation, and try to explain it as empathy at the psychological level. Finally, our model achieves 325 on total score, 0.545 on average score. Our model won the first place on generated-based approaches, and won the third place on the entire task (compared with retrieved-based methods).
 
-<h2 id="DR-D3Q-Dynamic-Reward-based-Dueling-Deep-Dyna-Q"><a href="#DR-D3Q-Dynamic-Reward-based-Dueling-Deep-Dyna-Q" class="headerlink" title="DR-D3Q: Dynamic Reward-based Dueling Deep Dyna-Q"></a>DR-D3Q: Dynamic Reward-based Dueling Deep Dyna-Q</h2><div align="center">
+<h2 id="Dynamic-Reward-based-Dueling-Deep-Dyna-Q-Robust-Policy-Learning"><a href="#Dynamic-Reward-based-Dueling-Deep-Dyna-Q-Robust-Policy-Learning" class="headerlink" title="Dynamic Reward-based Dueling Deep Dyna-Q: Robust Policy Learning"></a>Dynamic Reward-based Dueling Deep Dyna-Q: Robust Policy Learning</h2><div align="center">
 <img src="/imgs/dr-d3q.png" width="700" align='center'/>
 </div>
-本文提出了一种基于动态奖励的决斗DDQ模型（Dynamic-Reward based Dueling Deep Dyna-Q, DR-D3Q)。该模型通过引入动态奖励和Dueling DQN，能够实现在噪声环境中更鲁棒的对话策略学习。 为了补充有限数量的真实用户体验，我们将DDQ框架作为基本框架。仿真实验和人工评估的结果表明，DR-D3Q在嘈杂的环境中显着提高了策略学习任务的性能。
+In this paper, we propose a new approach, called Dynamic Reward-based Dueling Deep Dyna-Q (DR-D3Q). The DR-D3Q can learn policies in noise robustly, and it is easy to implement by combining dynamic reward and the Dueling Deep Q-Network (Dueling DQN) into Deep Dyna-Q (DDQ) framework. Unlike typical dialogue reward function, we integrate dynamic reward that provides reward in real-time for agent to make Dueling DQN adapt to dialogue domain. For the purpose of supplementing the limited amount of real user experiences, we take the DDQ framework as the basic framework. Experiments using simulation and human evaluation show that the DR-D3Q significantly improve the performance of policy learning tasks in noisy environments.
       
 
       
