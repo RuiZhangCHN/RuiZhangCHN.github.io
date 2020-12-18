@@ -8,22 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Rui Zhang (SCUT)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[English|中文]  Emotional Text Generation Based on Cross-Domain Sentiment Transfer   为了解决现有情感生成方法面临的缺乏大规模标注数据的问题，本文提出了一种基于对抗生成网络(GAN)的跨领域文本情感迁移方法，该框架使用跨领域的情感标注数据来协助特定领域情感文本生成模型的训练。通过将对抗性强化学习与监督学习相结合">
+  <meta name="description" content="[English|中文]  --- 2020 ---  Predicting Emotion Reactions for Human-Computer Conversation: A Variational Approach本文提出了一种基于变分网络的闲聊对话情感预测方法——交互情感学习IEL，旨在以数据驱动的方式解决情感对话生成中的应答情感预测问题。应答情感预测可以看作情感分类问题的一">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rui Zhang (SCUT)">
 <meta property="og:url" content="http://yoursite.com/publication_chn/index.html">
 <meta property="og:site_name" content="Rui Zhang (SCUT)">
-<meta property="og:description" content="[English|中文]  Emotional Text Generation Based on Cross-Domain Sentiment Transfer   为了解决现有情感生成方法面临的缺乏大规模标注数据的问题，本文提出了一种基于对抗生成网络(GAN)的跨领域文本情感迁移方法，该框架使用跨领域的情感标注数据来协助特定领域情感文本生成模型的训练。通过将对抗性强化学习与监督学习相结合">
+<meta property="og:description" content="[English|中文]  --- 2020 ---  Predicting Emotion Reactions for Human-Computer Conversation: A Variational Approach本文提出了一种基于变分网络的闲聊对话情感预测方法——交互情感学习IEL，旨在以数据驱动的方式解决情感对话生成中的应答情感预测问题。应答情感预测可以看作情感分类问题的一">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/imgs/cdtst.png">
-<meta property="og:image" content="http://yoursite.com/imgs/escvae.png">
-<meta property="og:image" content="http://yoursite.com/imgs/mecs.png">
 <meta property="og:image" content="http://yoursite.com/imgs/dr-d3q.png">
-<meta property="article:published_time" content="2020-11-05T02:45:37.615Z">
-<meta property="article:modified_time" content="2020-11-05T02:45:37.615Z">
+<meta property="article:published_time" content="2020-12-18T07:42:22.548Z">
+<meta property="article:modified_time" content="2020-12-18T07:42:22.548Z">
 <meta property="article:author" content="Rui Zhang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/imgs/cdtst.png">
+<meta name="twitter:image" content="http://yoursite.com/imgs/dr-d3q.png">
   
     <link rel="alternative" href="/atom.xml" title="Rui Zhang (SCUT)" type="application/atom+xml">
   
@@ -64,9 +61,9 @@
 			
 				<li><a href="/">Home/主页</a></li>
 	        
-				<li><a href="/cvs/Rui%20Zhang_CV_ver202012en.pdf">Curriculum Vitae[English]</a></li>
+				<li><a href="/publication_chn">QuickView/速览</a></li>
 	        
-				<li><a href="/cvs/Rui%20Zhang_CV_ver202012cn.pdf">个人简历[中文]</a></li>
+				<li><a href="/cvs/Rui%20Zhang_CV_ver202012.pdf">CV/个人简历</a></li>
 	        
 			</ul>
 		</nav>
@@ -132,9 +129,9 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">Home/主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/cvs/Rui%20Zhang_CV_ver202012en.pdf">Curriculum Vitae[English]</a></li>
+					<li style="width: 33.333333333333336%"><a href="/publication_chn">QuickView/速览</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/cvs/Rui%20Zhang_CV_ver202012cn.pdf">个人简历[中文]</a></li>
+					<li style="width: 33.333333333333336%"><a href="/cvs/Rui%20Zhang_CV_ver202012.pdf">CV/个人简历</a></li>
 		        
 				</ul>
 			</nav>
@@ -155,28 +152,30 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><text>   <br></text></p>
-<p align="right"><b>[<a href="/publication">English</a>|中文]</b></p>
+<!--<p align="right"><b>[<a href="/publication">English</a>|中文]</b></p>-->
+<p align="right"><b>[<font color=gray>English</font>|中文]</b></p>
 
-<h2 id="Emotional-Text-Generation-Based-on-Cross-Domain-Sentiment-Transfer"><a href="#Emotional-Text-Generation-Based-on-Cross-Domain-Sentiment-Transfer" class="headerlink" title="Emotional Text Generation Based on Cross-Domain Sentiment Transfer"></a>Emotional Text Generation Based on Cross-Domain Sentiment Transfer</h2><div align="center">
-<img src="/imgs/cdtst.png" width="700" align='center'/>
-</div>
-为了解决现有情感生成方法面临的缺乏大规模标注数据的问题，本文提出了一种基于对抗生成网络(GAN)的跨领域文本情感迁移方法，该框架使用跨领域的情感标注数据来协助特定领域情感文本生成模型的训练。通过将对抗性强化学习与监督学习相结合，我们的框架能够学习到情绪风格转换模式并将其应用于情感文本生成。实验结果表明，我们的方法优于State-of-the-art方法，能够生成高质量的情感文本，同时保持域信息和内容语义的一致性。
+<p align="center"><br><font size=6><b>--- 2020 ---</b></font></p>
 
-<h2 id="Learning-to-Converse-Emotionally-Like-Humans-A-Conditional-Variational-Approach"><a href="#Learning-to-Converse-Emotionally-Like-Humans-A-Conditional-Variational-Approach" class="headerlink" title="Learning to Converse Emotionally Like Humans: A Conditional Variational Approach"></a>Learning to Converse Emotionally Like Humans: A Conditional Variational Approach</h2><div align="center">
-<img src="/imgs/escvae.png" width="700" align='center'/>
-</div>
-情绪智力是人类智力的关键组成部分之一，探索如何为对话模型赋予情感已成为近年来的研究热点。然而，现有的情感对话方法都无法为响应确定合适的情感类别。在本文中，我们提出了情绪敏感的变分自编码器(Emotion-sensitive Conditional Variational AutoEncoder, EsCVAE)以生成具有合适的情感类型的响应。我们证明了人类对话中存在一些频繁的情感互动模式（例如，喜欢-开心，生气-厌恶），并且我们的模型能够学习这种频繁模式并将其应用于情感对话的产生。 实验表明，我们提出的方法可以产生合适的情绪，并显着改善情感对话的生成质量。
+<h3 id="Predicting-Emotion-Reactions-for-Human-Computer-Conversation-A-Variational-Approach"><a href="#Predicting-Emotion-Reactions-for-Human-Computer-Conversation-A-Variational-Approach" class="headerlink" title="Predicting Emotion Reactions for Human-Computer Conversation: A Variational Approach"></a>Predicting Emotion Reactions for Human-Computer Conversation: A Variational Approach</h3><p>本文提出了一种基于变分网络的闲聊对话情感预测方法——交互情感学习IEL，旨在以数据驱动的方式解决情感对话生成中的应答情感预测问题。应答情感预测可以看作情感分类问题的一个特例，它需要根据已知的对话上下文预测当前时刻对话系统应该产生何种类型的情感用于应答生成。在该任务中，情感预测先于文本生成，因此不能够和传统的情感分类方法一样通过当前文本的字面内容对文本情感类别进行判断，而是需要模型学习到根据上下文推断应答情感的能力。我们在三个数据集上将我们的模型与现有的方法进行比较，实验结果表明通过引入变分学习模块，我们所提出的方法能够显著地提高在三个数据集上的应答情感预测性能。<!--[<a href="/publication_chn/IEL">详细</a>]--></p>
+<h3 id="Dynamic-Reward-based-Dueling-Deep-Dyna-Q-Robust-Policy-Learning-in-Noisy-Environments"><a href="#Dynamic-Reward-based-Dueling-Deep-Dyna-Q-Robust-Policy-Learning-in-Noisy-Environments" class="headerlink" title="Dynamic Reward-based Dueling Deep Dyna-Q: Robust Policy Learning in Noisy Environments"></a>Dynamic Reward-based Dueling Deep Dyna-Q: Robust Policy Learning in Noisy Environments</h3><p>本文提出了DR-D3Q模型，通过结合Dueling网络和基于子任务度的动态奖励，提高基于深度强化学习的策略学习方法在真实噪音对话环境下的性能。所提出的方法基于Deep Dyna-Q框架实现，通过定义任务导向型对话系统中子任务的划分方法并对完成了子任务的对话状态进行奖励，有效地缓解了强化学习的奖励稀疏问题。我们在Movie-ticket Booking数据集上评估了我们的方法。实验表明，我们的方法在高噪音环境下仍具有较好的鲁棒性。<!--[<a href="/publication_chn/DRD3Q">详细</a>]--></p>
+<p align="center"><br><font size=6><b>--- 2019 ---</b></font></p>
 
+<h3 id="Emotional-Text-Generation-Based-on-Cross-Domain-Sentiment-Transfer"><a href="#Emotional-Text-Generation-Based-on-Cross-Domain-Sentiment-Transfer" class="headerlink" title="Emotional Text Generation Based on Cross-Domain Sentiment Transfer"></a>Emotional Text Generation Based on Cross-Domain Sentiment Transfer</h3><p>本文提出了一种基于对抗生成网络(GANs)的跨领域文本情感迁移方法CDTST，旨在解决现有的情感文本生成方法中所面临的缺乏大规模标注数据的问题。CDTST模型使用跨领域的情感标注数据来协助特定领域情感文本生成模型的训练，因此，CDTST模型需要学会如何将文本转换为另一种风格，与此同时保留原始的（情感无关的）语义信息。我们在Yelp和Amazon数据集上对CDTST模型进行了评估。实验结果表明，我们的方法优于State-of-the-art方法，能够生成高质量的情感文本，同时保持域信息和内容语义的一致性。<!--[<a href="/publication_chn/CDTST">详细</a>]--></p>
+<h3 id="Cascade2vec-Learning-Dynamic-Cascade-Representation-by-Recurrent-Graph-Neural-Networks"><a href="#Cascade2vec-Learning-Dynamic-Cascade-Representation-by-Recurrent-Graph-Neural-Networks" class="headerlink" title="Cascade2vec: Learning Dynamic Cascade Representation by Recurrent Graph Neural Networks"></a>Cascade2vec: Learning Dynamic Cascade Representation by Recurrent Graph Neural Networks</h3><p>本文提出了一种名为Cascade2vec的新模型，基于时序图神经网络的学习动态级联网络的时空特征。通过设计图神经网络残差模块、和共享注意力权重、以及加入多层感知网络来提升当前的图神经网络的表示学习能力，得到最优结果。此外，集成所提出的图神经网络到循环神经网络中，形成一个时序图神经网络，兼具学习传播网络的时空特征能力。实验结果表明，我们的方法在多个社交网络信息传播数据的预测任务中，大幅度降低了预测的误差（降低误差超过10%），提高了传播预测的精度。<!--[<a href="/publication_chn/CASCADE2VEC">详细</a>]--></p>
+<h3 id="Network2Vec-Learning-Node-Representation-Based-on-Space-Mapping-in-Networks"><a href="#Network2Vec-Learning-Node-Representation-Based-on-Space-Mapping-in-Networks" class="headerlink" title="Network2Vec: Learning Node Representation Based on Space Mapping in Networks"></a>Network2Vec: Learning Node Representation Based on Space Mapping in Networks</h3><p>本文提出了一种网络表示学习方法Network2Vec，该模型利用群同态，在网络空间和嵌入空间之间架起函数映射连接。该方法使用马尔可夫链对网络进行不同维度的采样，并统计采样体现的网络特征，使用改进的矩阵分解方法，学习潜入特征和网络特征的映射关系。在节点分类、链路预测和社区可视化等不同学习任务都有较好的的实验结果。<!--[<a href="/publication_chn/NETWORK2VEC">详细</a>]--></p>
+<h3 id="基于标签深度分析的音乐自动标注算法"><a href="#基于标签深度分析的音乐自动标注算法" class="headerlink" title="基于标签深度分析的音乐自动标注算法"></a>基于标签深度分析的音乐自动标注算法</h3><p>本文提出了一种基于标签深度分析的音乐自动标注算法。该算法结合基于卷积网络的音频特征提取和音频标签表示学习，通过聚合音频特征和标签特征实现音乐标签的自动标注。在MSD数据集、MTAT数据集和真实商业数据集上的实验结果表明，文中算法在带有噪声的音乐数据集上的音乐标注效果优于其他先进的音乐标注算法。<!--[<a href="/publication_chn/MUSIC_DEEP_LABEL">详细</a>]--></p>
+<p align="center"><br><font size=6><b>--- 2018 以前 ---</b></font></p>
 
-<h2 id="Building-Emotional-Conversation-Systems-using-Multi-task-Seq2Seq-Learning"><a href="#Building-Emotional-Conversation-Systems-using-Multi-task-Seq2Seq-Learning" class="headerlink" title="Building Emotional Conversation Systems using Multi-task Seq2Seq Learning"></a>Building Emotional Conversation Systems using Multi-task Seq2Seq Learning</h2><div align="center">
-<img src="/imgs/mecs.png" width="700" align='center'/>
-</div>
-本文介绍了我们为NLPCC 2017情感对话生成技术评测任务设计的系统。我们的模型采用多任务序列到序列(Multi-task Sequence-to-Sequence)学习框架来捕捉对话中的内容信息，并针对每种类型的情绪产生响应。评估结果表明，我们的模型在情绪生成方面具有竞争力，在平均情绪准确度指标达到0.9658。我们还观察了人类对话中的情感互动，并尝试利用心理学中的同理心现象解决对话中的情绪响应问题。最后，我们的模型在总分上达到325，在平均分上达到0.545。 <font color=red>我们的模型在基于生成(Generation-based)方法的评测中获得第一名，并在整个评测任务中获得第三名。</font><font color=blue size=2>注：完整评测任务的前两名均为基于检索的方法(Retrived-based)。</font>
-
-<h2 id="Dynamic-Reward-based-Dueling-Deep-Dyna-Q-Robust-Policy-Learning"><a href="#Dynamic-Reward-based-Dueling-Deep-Dyna-Q-Robust-Policy-Learning" class="headerlink" title="Dynamic Reward-based Dueling Deep Dyna-Q: Robust Policy Learning"></a>Dynamic Reward-based Dueling Deep Dyna-Q: Robust Policy Learning</h2><div align="center">
+<h3 id="Learning-to-Converse-Emotionally-Like-Humans-A-Conditional-Variational-Approach"><a href="#Learning-to-Converse-Emotionally-Like-Humans-A-Conditional-Variational-Approach" class="headerlink" title="Learning to Converse Emotionally Like Humans: A Conditional Variational Approach"></a>Learning to Converse Emotionally Like Humans: A Conditional Variational Approach</h3><p>情绪智力是人类智力的关键组成部分之一，探索如何为对话模型赋予情感已成为近年来的研究热点。然而，现有的情感对话方法都无法为响应确定合适的情感类别。在本文中，我们提出了情绪敏感的变分自编码器(Emotion-sensitive Conditional Variational AutoEncoder, EsCVAE)以生成具有合适的情感类型的响应。我们证明了人类对话中存在一些频繁的情感互动模式（例如，喜欢-开心，生气-厌恶），并且我们的模型能够学习这种频繁模式并将其应用于情感对话的产生。 实验表明，我们提出的方法可以产生合适的情绪，并显着改善情感对话的生成质量。<!--[<a href="/publication_chn/ESCVAE">详细</a>]--></p>
+<h3 id="Building-Emotional-Conversation-Systems-using-Multi-task-Seq2Seq-Learning"><a href="#Building-Emotional-Conversation-Systems-using-Multi-task-Seq2Seq-Learning" class="headerlink" title="Building Emotional Conversation Systems using Multi-task Seq2Seq Learning"></a>Building Emotional Conversation Systems using Multi-task Seq2Seq Learning</h3><p>本文介绍了我们为NLPCC 2017情感对话生成技术评测任务设计的系统。我们的模型采用多任务序列到序列(Multi-task Sequence-to-Sequence)学习框架来捕捉对话中的内容信息，并针对每种类型的情绪产生响应。评估结果表明，我们的模型在情绪生成方面具有竞争力，在平均情绪准确度指标达到0.9658。<!-- [<a href="/publication_chn/MECS">详细</a>]--></p>
+<!--
+## Dynamic Reward-based Dueling Deep Dyna-Q: Robust Policy Learning
+<div align="center">
 <img src="/imgs/dr-d3q.png" width="700" align='center'/>
 </div>
 本文提出了一种基于动态奖励的决斗DDQ模型（Dynamic-Reward based Dueling Deep Dyna-Q, DR-D3Q)。该模型通过引入动态奖励和Dueling DQN，能够实现在噪声环境中更鲁棒的对话策略学习。 为了补充有限数量的真实用户体验，我们将DDQ框架作为基本框架。仿真实验和人工评估的结果表明，DR-D3Q在嘈杂的环境中显着提高了策略学习任务的性能。
+-->
       
 
       

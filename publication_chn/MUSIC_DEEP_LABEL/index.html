@@ -8,22 +8,19 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Rui Zhang (SCUT)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[English|中文]  Emotional Text Generation Based on Cross-Domain Sentiment Transfer   In recent years, several neural network based emotional text generation methods have been investigated. However,">
+  <meta name="description" content="[English|中文]   Emotional Text Generation Based on Cross-Domain Sentiment Transfer为了解决传统的标签自动标注模型在包含有大量噪声标签的真实音乐数据集中自动标注效果差的问题，文章提出了一种基于标签深度分析(Deep Analysis on Labels, DAL)的音乐自动标注算法，通过对音乐标签的表示学习，挖">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Rui Zhang (SCUT)">
-<meta property="og:url" content="http://yoursite.com/publication/index.html">
+<meta property="og:url" content="http://yoursite.com/publication_chn/MUSIC_DEEP_LABEL/index.html">
 <meta property="og:site_name" content="Rui Zhang (SCUT)">
-<meta property="og:description" content="[English|中文]  Emotional Text Generation Based on Cross-Domain Sentiment Transfer   In recent years, several neural network based emotional text generation methods have been investigated. However,">
+<meta property="og:description" content="[English|中文]   Emotional Text Generation Based on Cross-Domain Sentiment Transfer为了解决传统的标签自动标注模型在包含有大量噪声标签的真实音乐数据集中自动标注效果差的问题，文章提出了一种基于标签深度分析(Deep Analysis on Labels, DAL)的音乐自动标注算法，通过对音乐标签的表示学习，挖">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://yoursite.com/imgs/cdtst.png">
-<meta property="og:image" content="http://yoursite.com/imgs/escvae.png">
-<meta property="og:image" content="http://yoursite.com/imgs/mecs.png">
-<meta property="og:image" content="http://yoursite.com/imgs/dr-d3q.png">
-<meta property="article:published_time" content="2020-11-05T02:45:06.132Z">
-<meta property="article:modified_time" content="2020-11-05T02:45:06.132Z">
+<meta property="og:image" content="http://yoursite.com/imgs/music_deep.png">
+<meta property="article:published_time" content="2020-12-18T06:08:04.837Z">
+<meta property="article:modified_time" content="2020-12-18T06:08:04.837Z">
 <meta property="article:author" content="Rui Zhang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/imgs/cdtst.png">
+<meta name="twitter:image" content="http://yoursite.com/imgs/music_deep.png">
   
     <link rel="alternative" href="/atom.xml" title="Rui Zhang (SCUT)" type="application/atom+xml">
   
@@ -64,9 +61,9 @@
 			
 				<li><a href="/">Home/主页</a></li>
 	        
-				<li><a href="/cvs/Rui%20Zhang_CV_ver202012en.pdf">Curriculum Vitae[English]</a></li>
+				<li><a href="/publication_chn">QuickView/速览</a></li>
 	        
-				<li><a href="/cvs/Rui%20Zhang_CV_ver202012cn.pdf">个人简历[中文]</a></li>
+				<li><a href="/cvs/Rui%20Zhang_CV_ver202012.pdf">CV/个人简历</a></li>
 	        
 			</ul>
 		</nav>
@@ -132,9 +129,9 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">Home/主页</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/cvs/Rui%20Zhang_CV_ver202012en.pdf">Curriculum Vitae[English]</a></li>
+					<li style="width: 33.333333333333336%"><a href="/publication_chn">QuickView/速览</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/cvs/Rui%20Zhang_CV_ver202012cn.pdf">个人简历[中文]</a></li>
+					<li style="width: 33.333333333333336%"><a href="/cvs/Rui%20Zhang_CV_ver202012.pdf">CV/个人简历</a></li>
 		        
 				</ul>
 			</nav>
@@ -155,28 +152,132 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p><text>   <br></text></p>
-<p align="right"><b>[English|<a href="/publication_chn">中文</a>]</b></p>
+<!--<p align="right"><b>[<a href="/publication">English</a>|中文]</b></p>-->
+<p align="right"><b>[<font color=gray>English</font>|中文]</b></p>
 
-<h2 id="Emotional-Text-Generation-Based-on-Cross-Domain-Sentiment-Transfer"><a href="#Emotional-Text-Generation-Based-on-Cross-Domain-Sentiment-Transfer" class="headerlink" title="Emotional Text Generation Based on Cross-Domain Sentiment Transfer"></a>Emotional Text Generation Based on Cross-Domain Sentiment Transfer</h2><div align="center">
-<img src="/imgs/cdtst.png" width="700" align='center'/>
+
+<h3 id="Emotional-Text-Generation-Based-on-Cross-Domain-Sentiment-Transfer"><a href="#Emotional-Text-Generation-Based-on-Cross-Domain-Sentiment-Transfer" class="headerlink" title="Emotional Text Generation Based on Cross-Domain Sentiment Transfer"></a>Emotional Text Generation Based on Cross-Domain Sentiment Transfer</h3><p>为了解决传统的标签自动标注模型在包含有大量噪声标签的真实音乐数据集中自动标注效果差的问题，文章提出了一种基于标签深度分析(Deep Analysis on Labels, DAL)的音乐自动标注算法，通过对音乐标签的表示学习，挖掘音频特征与音乐标签之间的潜在联系，改善音乐自动标注效果。在大规模真实音乐数据集上实验表明，本文所提出的模型能够显著提升标注效果。</p>
+<p>DAL模型包含四个模块：音频特征提取、标签向量提取、特征聚合和标签预测。如图所示。</p>
+<div align="center">
+<img src="/imgs/music_deep.png" width="300" align='center'/>
 </div>
-In recent years, several neural network based emotional text generation methods have been investigated. However, existing emotional text generation approaches often suffer from the problem of requiring large-scale annotated data. In order to solve the above problem, this paper propose a GAN-based cross-domain text sentiment transfer model, which uses annotated data from other domains to assist in the training of emotional text generation network. By combining adversarial reinforcement learning with supervised learning, our model is able to extract patterns of sentiment transformation and apply them in emotional text generation. Experimental results have shown that our approach outperforms the state-of-the-art methods, and is able to generate high quality emotional text while maintaining the consistency of domain information and content semantics.
 
-<h2 id="Learning-to-Converse-Emotionally-Like-Humans-A-Conditional-Variational-Approach"><a href="#Learning-to-Converse-Emotionally-Like-Humans-A-Conditional-Variational-Approach" class="headerlink" title="Learning to Converse Emotionally Like Humans: A Conditional Variational Approach"></a>Learning to Converse Emotionally Like Humans: A Conditional Variational Approach</h2><div align="center">
-<img src="/imgs/escvae.png" width="700" align='center'/>
-</div>
-Emotional intelligence is one of the key parts of human intelligence. Exploring how to endow conversation models with emotional intelligence is a recent research hotspot. Although several emotional conversation approaches have been introduced, none of these methods were able to decide an appropriate emotion category for the response. In this paper, we propose the EsCVAE-I and EsCVAE-II model to learn to automatically specify a reasonable emotion category for response generation. We show that there are some frequent emotion interaction patterns in humans dialogue (e.g. happiness-like, angry-disgust), and our models are able to learn such frequent patterns and apply it to emotional conversation generation. Experiments show that our proposed approaches can generate appropriate emotion and yield significant improvements over the baseline methods in emotional conversation.
+<p>音频特征提取模块通过有监督学习对多层卷积网络进行预训练，初步优化网络参数。首先将原始音频剪辑转换为梅尔频谱图，并采用非线性函数log2(1+C|A|)进行压缩，得到预处理后的频谱图像。将上述频谱图像作为输入特征，使用多层级卷积网络进行逐层特征提取和抽象，捕捉与音乐自动标注任务相关的有效特征。各卷积层通过指数线性激活函数(ELU)和批规范化操作对网络层输入进行线性变换，并使用残差连接进一步提升模型的泛化能力。</p>
+<p>标签向量提取模块利用卷积网络对音乐标签进行表示学习，得到音乐标签的向量化表示。该模块网络首先通过监督学习训练模型进行标签预测直至模型收敛，进而通过提取最后一个池化层与分类输出层之间的全连接参数矩阵得到音乐标签的表示学习结果。该参数矩阵可表示为MxN维的矩阵，其中M为音乐标签的个数，N为标签向量的维度。</p>
+<p>特征聚合模块通过向量池化、线性变换和线性连接实现音频特征与标签向量特征的融合；标签预测模块则根据融合特征预测音频标签，通过有监督学习对网络参数进行微调。</p>
+<p>本文在两个公开的音乐标注数据集百万音乐数据集(MSD)和MagnaTagATune数据集(MTAT)，以及一个真实商业音乐数据集上进行了实验。首先，文章在MSD和MTAT数据集上验证了多层卷积网络对音频特征的提取能力。分别记音频特征提取网络中的三个卷积层为L1、L2和L3，数字表示网络层级。实验将三种不同深度的卷积层进行两两聚合(分别记为L1+L2、L1+L3和L2+L3)和同时聚合(记为L1+L2+L3)。同时，为了验证聚合特征相比于单层特征更具有效性，在对比试验中加入了独立的L1、L2、L3特征进行对比。训练过程中所有音频的音乐标签向量均被设置为缺省标签向量，以排除音乐标签向量对实验结果的影响。实验结果如下表所示。</p>
+<table>
+    <tr>
+        <th rowspan="2">数据集</th>
+        <th colspan="7">AUC</th>
+    </tr>
+    <tr>
+        <th>L1+L2+L3</th>
+        <th>L1+L2</th>
+        <th>L1+L3</th>
+        <th>L2+L3</th>
+        <th>L3</th>
+        <th>L2</th>
+        <th>L1</th>
+    </tr>
+    <tr>
+        <th>MSD</th>
+        <td><b>0.8858</b></td>
+        <td>0.8828</td>
+        <td>0.8844</td>
+        <td>0.8852</td>
+        <td>0.8825</td>
+        <td>0.8811</td>
+        <td>0.8694</td>
+    </tr>
+    <tr>
+        <th>MTAT</th>
+        <td><b>0.8996</b></td>
+        <td>0.8986</td>
+        <td>0.8983</td>
+        <td>0.8989</td>
+        <td>0.8977</td>
+        <td>0.8976</td>
+        <td>0.8935</td>
+    </tr>
+</table>
 
+<p>上述实验结果表明，相比于使用单层音频特征进行预测，通过融合三种层级音频特征，标注模型可以取得最好的表现。本文还分别在MSD数据集、MTAT数据集和真实商业数据集上将文中所提出的DAL算法与当前先进的自动标注算法进行对比，实验结果如下表所示。</p>
+<table>
+    <tr>
+        <th rowspan="2">模型</th>
+        <th colspan="3">数据集</th>
+    </tr>
+    <tr>
+        <th>MTAT</th>
+        <th>MSD</th>
+        <th>商业数据集</th>
+    </tr>
+    <tr>
+        <th>多尺度特征学习</th>
+        <td>0.898</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <th>一维CNN</th>
+        <td>0.882</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <th>PCNN</th>
+        <td>0.901</td>
+        <td>-</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <th>FCN</th>
+        <td>0.894</td>
+        <td>0.851</td>
+        <td>0.795</td>
+    </tr>
+    <tr>
+        <th>CRNN</th>
+        <td>-</td>
+        <td>0.862</td>
+        <td>0.786</td>
+    </tr>
+    <tr>
+        <th>二维CNN</th>
+        <td>-</td>
+        <td>-</td>
+        <td>0.672</td>
+    </tr>
+    <tr>
+        <th>时序特征学习网络</th>
+        <td>-</td>
+        <td>-</td>
+        <td>0.689</td>
+    </tr>
+    <tr>
+        <th>音频特征提取网络</th>
+        <td>0.890</td>
+        <td>0.886</td>
+        <td>0.816</td>
+    </tr>
+    <tr>
+        <th>DAL算法(缺省向量)</th>
+        <td>0.898</td>
+        <td>0.890</td>
+        <td>0.832</td>
+    </tr>
+    <tr>
+        <th>DAL算法</th>
+        <td>0.899</td>
+        <td>0.893</td>
+        <td>0.850</td>
+    </tr>
+</table>
 
-<h2 id="Building-Emotional-Conversation-Systems-using-Multi-task-Seq2Seq-Learning"><a href="#Building-Emotional-Conversation-Systems-using-Multi-task-Seq2Seq-Learning" class="headerlink" title="Building Emotional Conversation Systems using Multi-task Seq2Seq Learning"></a>Building Emotional Conversation Systems using Multi-task Seq2Seq Learning</h2><div align="center">
-<img src="/imgs/mecs.png" width="700" align='center'/>
-</div>
-This paper describes our system designed for the NLPCC 2017 shared task on emotional conversation generation. Our model adopts a multi-task Seq2Seq learning framework to capture the textual information of post sequence and generate responses for each type of emotions simultaneously. Evaluation results suggest that our model is competitive on emotional generation, which achieves 0.9658 on average emotion accuracy. We also observe the emotional interaction in human conversation, and try to explain it as empathy at the psychological level. Finally, our model achieves 325 on total score, 0.545 on average score. Our model won the first place on generated-based approaches, and won the third place on the entire task (compared with retrieved-based methods).
-
-<h2 id="Dynamic-Reward-based-Dueling-Deep-Dyna-Q-Robust-Policy-Learning"><a href="#Dynamic-Reward-based-Dueling-Deep-Dyna-Q-Robust-Policy-Learning" class="headerlink" title="Dynamic Reward-based Dueling Deep Dyna-Q: Robust Policy Learning"></a>Dynamic Reward-based Dueling Deep Dyna-Q: Robust Policy Learning</h2><div align="center">
-<img src="/imgs/dr-d3q.png" width="700" align='center'/>
-</div>
-In this paper, we propose a new approach, called Dynamic Reward-based Dueling Deep Dyna-Q (DR-D3Q). The DR-D3Q can learn policies in noise robustly, and it is easy to implement by combining dynamic reward and the Dueling Deep Q-Network (Dueling DQN) into Deep Dyna-Q (DDQ) framework. Unlike typical dialogue reward function, we integrate dynamic reward that provides reward in real-time for agent to make Dueling DQN adapt to dialogue domain. For the purpose of supplementing the limited amount of real user experiences, we take the DDQ framework as the basic framework. Experiments using simulation and human evaluation show that the DR-D3Q significantly improve the performance of policy learning tasks in noisy environments.
+<p>上述实验结果表明，文中提出的算法在MSD数据集和真实商业数据集上的表现优于其他模型，在MTAT数据集上的表现与最好的算法(PCNN)相近。通过数据分析我们认为，这是由于MTAT数据集中噪声数据的比例相对另外两个数据集较少。</p>
+<p>本文提出了一种基于标签深度分析的音乐自动标注算法。该算法结合基于卷积网络的音频特征提取和音频标签表示学习，通过聚合音频特征和标签特征实现音乐标签的自动标注。在MSD数据集、MTAT数据集和真实商业数据集上的实验结果表明，文中算法在带有噪声的音乐数据集上的音乐标注效果优于其他先进的音乐标注算法。本文所提出的算法仅利用音频特征对音乐进行自动化标注，没有充分利用音乐视频和歌词等其他模态的信息。今后将进一步探索利用多模态信息进行音乐自动标注的方法。</p>
+<p align="right">[<a href="/publication_chn">返回</a>]</p>
       
 
       
