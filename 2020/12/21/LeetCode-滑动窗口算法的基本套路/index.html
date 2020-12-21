@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020/8 | Rui Zhang (SCUT)</title>
+  <title>[LeetCode]滑动窗口算法的基本套路 | Rui Zhang (SCUT)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Rui Zhang (SCUT)">
-<meta property="og:url" content="http://yoursite.com/archives/2020/08/index.html">
+  <meta name="description" content="这篇文章基于Labuladong的滑动窗口算法教程进行整理。原文主要基于C++语言实现上述算法，这里我采用了我平时使用的Python3作为编程语言。  首先列一下这篇文章所给出的算法框架的Python实现： 12345678910111213141516171819202122232425262728293031323334# str_long - 我们的滑动窗口要进行滑动的长序列# str_s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[LeetCode]滑动窗口算法的基本套路">
+<meta property="og:url" content="http://yoursite.com/2020/12/21/LeetCode-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%A5%97%E8%B7%AF/index.html">
 <meta property="og:site_name" content="Rui Zhang (SCUT)">
+<meta property="og:description" content="这篇文章基于Labuladong的滑动窗口算法教程进行整理。原文主要基于C++语言实现上述算法，这里我采用了我平时使用的Python3作为编程语言。  首先列一下这篇文章所给出的算法框架的Python实现： 12345678910111213141516171819202122232425262728293031323334# str_long - 我们的滑动窗口要进行滑动的长序列# str_s">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-21T12:56:35.000Z">
+<meta property="article:modified_time" content="2020-12-21T13:56:27.030Z">
 <meta property="article:author" content="Rui Zhang">
 <meta name="twitter:card" content="summary">
   
@@ -25,7 +29,7 @@
   <style type="text/css">
   
     #container.show {
-      background: linear-gradient(200deg,#a0cfe4,#e8c37e);
+      background: #ddd;
     }
   </style>
   
@@ -140,130 +144,86 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetCode-滑动窗口算法的基本套路" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [LeetCode]滑动窗口算法的基本套路
+    </h1>
+  
+
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>这篇文章基于Labuladong的<a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/%E7%AE%97%E6%B3%95%E6%80%9D%E7%BB%B4%E7%B3%BB%E5%88%97/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%8A%80%E5%B7%A7%E8%BF%9B%E9%98%B6.html">滑动窗口</a>算法教程进行整理。原文主要基于C++语言实现上述算法，这里我采用了我平时使用的Python3作为编程语言。</p>
+</blockquote>
+<p>首先列一下这篇文章所给出的算法框架的Python实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># str_long - 我们的滑动窗口要进行滑动的长序列</span><br><span class="line"># str_short - 我们的滑动窗口要满足的某些条件</span><br><span class="line"></span><br><span class="line">need &#x3D; dict(Counter(str_short))		# 比如说，这类题目通常要满足某些数量的字符</span><br><span class="line">windows &#x3D; &#123;&#125;				# 这个变量用来保存当前窗口所包含的内容的情况</span><br><span class="line"></span><br><span class="line">left, right &#x3D; 0, 0			# 左&#x2F;右指针</span><br><span class="line">valid &#x3D; 0				# 子目标满足的个数</span><br><span class="line"></span><br><span class="line">###################</span><br><span class="line"># 目标相关变量初始化 #</span><br><span class="line">###################</span><br><span class="line"></span><br><span class="line">while right &lt; len(str_long):</span><br><span class="line">    ch_in &#x3D; str_long[right]		# 将要移入窗口的字符</span><br><span class="line">    right +&#x3D; 1				# 移动右指针</span><br><span class="line"></span><br><span class="line">    ######################</span><br><span class="line">    # 更新窗口内数据的代码块 #</span><br><span class="line">    ######################</span><br><span class="line"></span><br><span class="line">    while valid &#x3D;&#x3D; len(need):	# 此时窗口满足约束要求，可以开始缩小窗口</span><br><span class="line">    	#########################</span><br><span class="line">    	# 记录题目所要求信息的代码块 #</span><br><span class="line">    	#########################</span><br><span class="line"></span><br><span class="line">    	ch_out &#x3D; str_long[short]	# 将要移出窗口的字符</span><br><span class="line">    	left +&#x3D; 1			# 移动左指针</span><br><span class="line"></span><br><span class="line">    	######################</span><br><span class="line">    	# 更新窗口内数据的代码块 #</span><br><span class="line">    	######################</span><br><span class="line"></span><br><span class="line">return ...</span><br></pre></td></tr></table></figure>
+
+<p>上述代码框架可以用来解决下面几道题目：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-substring-without-repeating-characters">3.无重复字符的最长子串（中等）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-window-substring">76.最小覆盖子串（困难）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-all-anagrams-in-a-string">438.找到字符串中所有字母异位词（中等）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutation-in-string">567.字符串的排列（中等）</a></li>
+</ul>
+<h4 id="3-无重复字符的最长子串"><a href="#3-无重复字符的最长子串" class="headerlink" title="3.无重复字符的最长子串"></a>3.无重复字符的最长子串</h4><p>对于这道题目，仅需要判断当前窗口内是否有重复的字符。</p>
+<h4 id="76-最小覆盖子串"><a href="#76-最小覆盖子串" class="headerlink" title="76.最小覆盖子串"></a>76.最小覆盖子串</h4><p>对于这道题目，首先通过移动右指针获得一个足够大的窗口来包含所有的关键字，然后通过移动左指针来缩小覆盖子串的范围。</p>
+<h4 id="438-找到字符串中所有字母异位词"><a href="#438-找到字符串中所有字母异位词" class="headerlink" title="438.找到字符串中所有字母异位词"></a>438.找到字符串中所有字母异位词</h4><p>见#567，一样的解法，只需要记录出现解的index即可。</p>
+<h4 id="567-字符串的排列"><a href="#567-字符串的排列" class="headerlink" title="567.字符串的排列"></a>567.字符串的排列</h4><p>对于这道题目，判断当前窗口内所有字符是否满足need且没有额外的字符出现。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/25/cdst/" class="archive-article-date">
-  	<time datetime="2020-08-25T08:00:04.301Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/25/cdst/">Cross-Domain Sentiment Transfer</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/25/escvae/" class="archive-article-date">
-  	<time datetime="2020-08-25T07:57:47.814Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-25</time>
-</a>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/25/escvae/">EsCVAE: Learning to Converse Emotionally Like Humans</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/25/mecs/" class="archive-article-date">
-  	<time datetime="2020-08-25T07:55:59.923Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/25/mecs/">MECS: Multi-Emotional Conversation System</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/08/25/drd3q/" class="archive-article-date">
-  	<time datetime="2020-08-25T07:48:38.037Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-08-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/08/25/drd3q/">DR-D3Q: Dynamic Reward-based Dueling Deep Dyna-Q</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -286,8 +246,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
