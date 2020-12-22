@@ -6,13 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2020 | Rui Zhang (SCUT)</title>
+  <title>[LeetCode]动态规划的基本套路②--子序列类型问题 | Rui Zhang (SCUT)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Rui Zhang (SCUT)">
-<meta property="og:url" content="http://yoursite.com/archives/2020/index.html">
+  <meta name="description" content="这篇文章基于Labuladong的动态规划算法教程进行整理。原文主要基于C++语言实现上述算法，这里我采用了我平时使用的Python3作为编程语言。  这篇文章涉及的算法思路可以用来解决以下问题：  72.编辑距离（困难） 354.俄罗斯套娃信封问题（困难） 53.最大子序和（简单） 1143.最长公共子序列（中等） 583. 两个字符串的删除操作（中等） 712.两个字符串的最小ASCII删除">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[LeetCode]动态规划的基本套路②--子序列类型问题">
+<meta property="og:url" content="http://yoursite.com/2020/12/22/LeetCode-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%A5%97%E8%B7%AF%E2%91%A1-%E5%AD%90%E5%BA%8F%E5%88%97%E7%B1%BB%E5%9E%8B%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Rui Zhang (SCUT)">
+<meta property="og:description" content="这篇文章基于Labuladong的动态规划算法教程进行整理。原文主要基于C++语言实现上述算法，这里我采用了我平时使用的Python3作为编程语言。  这篇文章涉及的算法思路可以用来解决以下问题：  72.编辑距离（困难） 354.俄罗斯套娃信封问题（困难） 53.最大子序和（简单） 1143.最长公共子序列（中等） 583. 两个字符串的删除操作（中等） 712.两个字符串的最小ASCII删除">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-12-22T02:21:27.000Z">
+<meta property="article:modified_time" content="2020-12-22T06:39:51.860Z">
 <meta property="article:author" content="Rui Zhang">
 <meta name="twitter:card" content="summary">
   
@@ -140,103 +144,189 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-LeetCode-动态规划的基本套路②-子序列类型问题" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      [LeetCode]动态规划的基本套路②--子序列类型问题
+    </h1>
+  
+
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>这篇文章基于Labuladong的<a target="_blank" rel="noopener" href="https://labuladong.gitee.io/algo/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/">动态规划</a>算法教程进行整理。原文主要基于C++语言实现上述算法，这里我采用了我平时使用的Python3作为编程语言。</p>
+</blockquote>
+<p>这篇文章涉及的算法思路可以用来解决以下问题：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance">72.编辑距离（困难）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/russian-doll-envelopes">354.俄罗斯套娃信封问题（困难）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-subarray/">53.最大子序和（简单）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-subsequence">1143.最长公共子序列（中等）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/">583. 两个字符串的删除操作（中等）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings">712.两个字符串的最小ASCII删除和（中等）</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-subsequence">516.最长回文子序列（中等）</a></li>
+</ul>
+<h3 id="编辑距离问题"><a href="#编辑距离问题" class="headerlink" title="编辑距离问题"></a>编辑距离问题</h3><p>编辑距离问题对应于LeetCode网站的<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/edit-distance">#72</a>问题。题目描述大致如下：</p>
+<blockquote>
+<p>给定两个字符串s1和s2，计算出将s1转换成s2所使用的最少操作数。<br>可以对字符串进行如下三种操作：</p>
+<ol>
+<li>插入一个字符</li>
+<li>删除一个字符</li>
+<li>替换一个字符</li>
+</ol>
+</blockquote>
+<p>解这道题的基本思路是使用两个指针i和j分别从序列的末尾开始向前移动，在每个位置分别进行可能的编辑操作，直到两个指针均到达序列的起始位置。这里其实从序列的开端向末尾移动也是可行的，但是在Basecase处需要针对不同的输入序列的长度计算终止条件，比较麻烦。</p>
+<p>首先按照解决动态规划问题的一般思路，确定所有要素的含义：</p>
+<ul>
+<li>明确Base Case: 当i走完或者j走完，直接返回剩下的字符串的长度。</li>
+<li>明确“状态”: 在目前的算法实现里面，(i,j)指针的位置就可以看作一种状态。</li>
+<li>明确“选择”: 这个是最好定义的一项，一共有四种选择：插入、删除、替换和跳过。</li>
+<li>定义dp数组/函数的含义: dp(i,j)——输入当前i,j指针的位置，返回最小的编辑距离。</li>
+</ul>
+<p>定义好上述四个要素之后，问题其实就迎刃而解了。以下是我的解法实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"># 执行用时：100 ms, 在所有 Python3 提交中击败了97.23%的用户</span><br><span class="line"># 内存消耗：16.8 MB, 在所有 Python3 提交中击败了83.40%的用户</span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    def minDistance(self, word1: str, word2: str) -&gt; int:</span><br><span class="line"></span><br><span class="line">        mem &#x3D; &#123;&#125;</span><br><span class="line"></span><br><span class="line">        def dp(i, j):</span><br><span class="line"></span><br><span class="line">            if (i,j) in mem.keys():</span><br><span class="line">                return mem[(i,j)]</span><br><span class="line"></span><br><span class="line">            res &#x3D; None</span><br><span class="line"></span><br><span class="line">            if i &#x3D;&#x3D; -1:</span><br><span class="line">                res &#x3D; j+1</span><br><span class="line">                mem[(i,j)] &#x3D; res</span><br><span class="line">            elif j &#x3D;&#x3D; -1:</span><br><span class="line">                res &#x3D; i+1</span><br><span class="line">                mem[(i,j)] &#x3D; res</span><br><span class="line"></span><br><span class="line">            elif word1[i] &#x3D;&#x3D; word2[j]:</span><br><span class="line">                res &#x3D; dp(i-1, j-1)</span><br><span class="line">                mem[(i,j)] &#x3D; res</span><br><span class="line">            else:</span><br><span class="line">                res &#x3D; min(</span><br><span class="line">                    dp(i-1,j-1) + 1,    # replace</span><br><span class="line">                    dp(i-1,j) +1,   # delete</span><br><span class="line">                    dp(i, j-1) + 1  # insert </span><br><span class="line">                )</span><br><span class="line">                mem[(i,j)] &#x3D; res</span><br><span class="line"></span><br><span class="line">            return res</span><br><span class="line"></span><br><span class="line">        return dp(len(word1)-1, len(word2)-1)</span><br></pre></td></tr></table></figure>
+
+<p>上述代码还可以实现成dp table的形式，可以看到代码里面存在(i,j)状态的转移。这里可以使用一个二维的表来解决。按照前面的文章，我们需要让dp table的计算中止在(i,j)=(m,n)的位置。这里需要注意的是<strong>数组的分配要多计算一维，用来考虑空前缀的情况</strong>。以下是我的代码实现（这个解法比上一个方法慢）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># 执行用时：184 ms, 在所有 Python3 提交中击败了65.45%的用户</span><br><span class="line"># 内存消耗：18.3 MB, 在所有 Python3 提交中击败了7.96%的用户</span><br><span class="line"></span><br><span class="line">class Solution:</span><br><span class="line">    def minDistance(self, word1: str, word2: str) -&gt; int:</span><br><span class="line"></span><br><span class="line">        len1 &#x3D; len(word1)</span><br><span class="line">        len2 &#x3D; len(word2)</span><br><span class="line"></span><br><span class="line">        dp &#x3D; [[0 for _ in range(len2+1)] for _ in range(len1+1)]</span><br><span class="line"></span><br><span class="line">        for i in range(1,len1+1):</span><br><span class="line">            dp[i][0] &#x3D; i</span><br><span class="line">        </span><br><span class="line">        for j in range(1, len2+1):</span><br><span class="line">            dp[0][j] &#x3D; j</span><br><span class="line"></span><br><span class="line">        for i in range(1, len1+1):</span><br><span class="line">            for j in range(1, len2+1):</span><br><span class="line">                if word1[i-1] &#x3D;&#x3D; word2[j-1]:</span><br><span class="line">                    dp[i][j] &#x3D; dp[i-1][j-1]</span><br><span class="line">                else:</span><br><span class="line">                    dp[i][j] &#x3D; min(dp[i-1][j-1] + 1,</span><br><span class="line">                                   dp[i][j-1] + 1,</span><br><span class="line">                                   dp[i-1][j] + 1)</span><br><span class="line"></span><br><span class="line">        return dp[len1][len2]</span><br></pre></td></tr></table></figure>
+
+<h3 id="信封嵌套问题"><a href="#信封嵌套问题" class="headerlink" title="信封嵌套问题"></a>信封嵌套问题</h3><p>信封嵌套对应于LeetCode网站的<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/russian-doll-envelopes">#354</a>问题。题目描述大致如下：</p>
+<blockquote>
+<p>给定一些标记了宽度和高度的信封，宽度和高度以整数对形式 (w, h) 出现。当另一个信封的宽度和高度都比这个信封大的时候，这个信封就可以放进另一个信封里，如同俄罗斯套娃一样。<br>请计算最多能有多少个信封能组成一组“俄罗斯套娃”信封（即可以把一个信封放到另一个信封里面）。</p>
+<p>说明:<br>不允许旋转信封。</p>
+</blockquote>
+<p>这道题可以看作是一个需要排序的最长升序子序列的复合问题。简单来说，因为要求宽度和高度都递增，所以可以先对其中一个维度进行升序排序，然后在另一个维度上进行最长升序子序列搜索操作。（这里还有一个技巧就是，由于要求宽度和高度都严格递增，也就是说每一个信封的宽度和高度都要比里面的信封的要大，所以在第二个维度上可以使用降序排序，这样可以避免取出第一维度具有相同元素的值）。</p>
+<p>假设现在已经有一个按照上述要求排序好的信封数组，老规矩定义一下四个基本要素：</p>
+<ul>
+<li>明确Base Case: 对于每一个位置，其初始的最长升序子序列长度为1.</li>
+<li>明确状态: 每个位置i对应一个状态。</li>
+<li>明确选择: 判断能不能把当前的节点加入升序子序列。</li>
+<li>定义dp数组/函数的含义: 包括当前节点i的最长子序列的长度。</li>
+</ul>
+<p>以下是我的实现代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxEnvelopes(self, envelopes: List[List[int]]) -&gt; int:</span><br><span class="line">        sorted_envs &#x3D; sorted(envelopes, key&#x3D;lambda x: (x[0], -x[1]))	# 排序</span><br><span class="line"></span><br><span class="line">        inp_seq &#x3D; [num[1] for num in sorted_envs]			# 取出第二列进行最长升序子序列计算</span><br><span class="line"></span><br><span class="line">        if not inp_seq:							# 处理空串</span><br><span class="line">            return 0</span><br><span class="line"></span><br><span class="line">        dp &#x3D; [1 for _ in range(len(inp_seq))]</span><br><span class="line"></span><br><span class="line">        for i in range(1, len(inp_seq)):</span><br><span class="line">            for j in range(i):</span><br><span class="line">                if inp_seq[j] &lt; inp_seq[i]:</span><br><span class="line">                    dp[i] &#x3D; max(dp[i], dp[j]+1)</span><br><span class="line"></span><br><span class="line">        return max(dp)</span><br></pre></td></tr></table></figure>
+
+<h3 id="最大子序和"><a href="#最大子序和" class="headerlink" title="最大子序和"></a>最大子序和</h3><p>最大子序和对应于LeetCode网站的<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-subarray/">#53</a>问题。题目描述大致如下：</p>
+<blockquote>
+<p>给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。</p>
+</blockquote>
+<p>解决这类问题的一般思路是考虑以位置i结尾的连续子序列可以取得的最大的和（因为要求连续）。四个基本要素如下：</p>
+<ul>
+<li>明确Base Case：对于初始状态，只考虑当前位置的值作为初始状态。</li>
+<li>明确状态：每一个位置i对应一个状态。</li>
+<li>明确选择：两种选择，最大子序和要么是当前位置的值加上前一个位置的最大子序和，要么就是自己。</li>
+<li>定义dp数组/函数的含义：以当前节点i为最右节点的最大子序和。</li>
+</ul>
+<p>以下是我的实现代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxSubArray(self, nums: List[int]) -&gt; int:</span><br><span class="line">        max_ans &#x3D; nums[0]</span><br><span class="line">        pre &#x3D; 0</span><br><span class="line"></span><br><span class="line">        for i in range(len(nums)):</span><br><span class="line">            pre &#x3D; max(pre+nums[i], nums[i])</span><br><span class="line">            max_ans &#x3D; max(pre, max_ans)</span><br><span class="line"></span><br><span class="line">        return max_ans</span><br></pre></td></tr></table></figure>
+
+<h3 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h3><p>最长公共子序列可以对应LeetCode网站的多个问题。首先来看<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-common-subsequence/">#1143. 最长公共子序列</a>问题。题目大致描述如下：</p>
+<blockquote>
+<p>给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。</p>
+<p>一个字符串的 子序列 是指这样一个新的字符串：它是由原字符串在不改变字符的相对顺序的情况下删除某些字符（也可以不删除任何字符）后组成的新字符串。<br>例如，”ace” 是 “abcde” 的子序列，但 “aec” 不是 “abcde” 的子序列。两个字符串的「公共子序列」是这两个字符串所共同拥有的子序列。</p>
+<p>若这两个字符串没有公共子序列，则返回 0。</p>
+</blockquote>
+<p>一个比较简单的思路是，使用两个指针i和j分别读取text1和text2，在位置dp[i][j]上记录在当前指针位置可以计算到的最长公共子串的长度。以i为主指针，j为副指针，每一轮移动一次i，然后将整个j从头到尾读取一次，计算dp[i][j]。如果当前i,j所指向的字符一致，则dp[i][j]==dp[i-1][j-1]，否则dp[i][j]等于i左移一次或j左移一次两种情况中的最大值。</p>
+<p>四个基本要素：</p>
+<ul>
+<li>明确Base Case：当i,j都为0时，最长公共子序列为空串，长度为0</li>
+<li>明确状态：(i,j)作为状态</li>
+<li>明确选择：当i和j指向相同元素时，使用i-1和j-1位置的值+1;否则，在i-1或j-1的情况中选取一个最大值</li>
+<li>定义dp数组/函数的含义：以i,j为指针位置时的最长公共子序列长度</li>
+</ul>
+<p>以下是我的实现代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def longestCommonSubsequence(self, text1: str, text2: str) -&gt; int:</span><br><span class="line">        stringA &#x3D; text1</span><br><span class="line">        stringB &#x3D; text2</span><br><span class="line">        res &#x3D; [[0 for _ in range(len(stringB)+1)] for _ in range(len(stringA)+1)]</span><br><span class="line">        for i in range(1, len(stringA)+1):</span><br><span class="line">            for j in range(1, len(stringB)+1):</span><br><span class="line">                if stringA[i-1] &#x3D;&#x3D; stringB[j-1]:</span><br><span class="line">                    res[i][j] &#x3D; res[i-1][j-1] + 1</span><br><span class="line">                else:</span><br><span class="line">                    res[i][j] &#x3D; max(res[i-1][j], res[i][j-1])</span><br><span class="line"></span><br><span class="line">        return res[-1][-1]</span><br></pre></td></tr></table></figure>
+
+<p>随后是<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/delete-operation-for-two-strings/submissions/">#583. 两个字符串的删除操作</a>问题。题目描述如下：</p>
+<blockquote>
+<p>给定两个单词 word1 和 word2，找到使得 word1 和 word2 相同所需的最小步数，每步可以删除任意一个字符串中的一个字符。</p>
+</blockquote>
+<p>这个问题有点像文章前面<strong>编辑距离问题</strong>问题的变种，差别就在于这里没有replace操作。直接放代码不再赘述：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minDistance(self, word1: str, word2: str) -&gt; int:</span><br><span class="line">        mem &#x3D; &#123;&#125;</span><br><span class="line"></span><br><span class="line">        def dp(i, j):</span><br><span class="line"></span><br><span class="line">            if (i,j) in mem.keys():</span><br><span class="line">                return mem[(i,j)]</span><br><span class="line"></span><br><span class="line">            res &#x3D; None</span><br><span class="line"></span><br><span class="line">            if i &#x3D;&#x3D; -1:</span><br><span class="line">                res &#x3D; j+1</span><br><span class="line">                mem[(i,j)] &#x3D; res</span><br><span class="line">            elif j &#x3D;&#x3D; -1:</span><br><span class="line">                res &#x3D; i+1</span><br><span class="line">                mem[(i,j)] &#x3D; res</span><br><span class="line"></span><br><span class="line">            elif word1[i] &#x3D;&#x3D; word2[j]:</span><br><span class="line">                res &#x3D; dp(i-1, j-1)</span><br><span class="line">                mem[(i,j)] &#x3D; res</span><br><span class="line">            else:</span><br><span class="line">                res &#x3D; min(</span><br><span class="line">                    dp(i-1,j) +1,   # delete one</span><br><span class="line">                    dp(i, j-1) + 1  # delete another </span><br><span class="line">                )</span><br><span class="line">                mem[(i,j)] &#x3D; res</span><br><span class="line"></span><br><span class="line">            return res</span><br><span class="line"></span><br><span class="line">        return dp(len(word1)-1, len(word2)-1)</span><br></pre></td></tr></table></figure>
+
+<p>最后是<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/minimum-ascii-delete-sum-for-two-strings/">#712. 两个字符串的最小ASCII删除和</a>问题，题目描述如下：</p>
+<blockquote>
+<p>给定两个字符串s1, s2，找到使两个字符串相等所需删除字符的ASCII值的最小和。</p>
+</blockquote>
+<p>这道题同样是<strong>编辑距离问题</strong>问题的变种，差别就在于这里没有replace操作，并且要计算ascii值。我们这里采用了基于dp table的解法，更好理解一点。直接放代码不再赘述：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def minimumDeleteSum(self, s1: str, s2: str) -&gt; int:</span><br><span class="line">        len1 &#x3D; len(s1)</span><br><span class="line">        len2 &#x3D; len(s2)</span><br><span class="line"></span><br><span class="line">        dp &#x3D; [[0 for _ in range(len2+1)] for _ in range(len1+1)]</span><br><span class="line"></span><br><span class="line">        for i in range(1,len1+1):</span><br><span class="line">            dp[i][0] &#x3D; sum([ord(k)for k in s1[:i]])</span><br><span class="line">        </span><br><span class="line">        for j in range(1, len2+1):</span><br><span class="line">            dp[0][j] &#x3D; sum([ord(k)for k in s2[:j]])</span><br><span class="line"></span><br><span class="line">        for i in range(1, len1+1):</span><br><span class="line">            for j in range(1, len2+1):</span><br><span class="line">                if s1[i-1] &#x3D;&#x3D; s2[j-1]:</span><br><span class="line">                    dp[i][j] &#x3D; dp[i-1][j-1]</span><br><span class="line">                else:</span><br><span class="line">                    dp[i][j] &#x3D; min(dp[i][j-1] + ord(s2[j-1]),</span><br><span class="line">                                   dp[i-1][j] + ord(s1[i-1]))</span><br><span class="line"></span><br><span class="line">        return dp[len1][len2]</span><br></pre></td></tr></table></figure>
+
+<h3 id="子序列动态规划问题的解题模板"><a href="#子序列动态规划问题的解题模板" class="headerlink" title="子序列动态规划问题的解题模板"></a>子序列动态规划问题的解题模板</h3><p>子序列的动态规划问题通常可以用dp数组来解决。一种常见的模板是使用一个一维的dp数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">array_len &#x3D; len(input_array)</span><br><span class="line">dp &#x3D; [0 for _ in range(array_len)]</span><br><span class="line"></span><br><span class="line">for i in range(1, array_len):</span><br><span class="line">	for j in range(i):</span><br><span class="line">		dp[i] &#x3D; 最值(dp[i], dp[j]+...)</span><br></pre></td></tr></table></figure>
+<p>这种一维的模板通常用于解决单个子序列上的动态规划问题。</p>
+<p>另一种模板则使用二维数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dp &#x3D; [[初始化值 for _ in range(column)] for _ in range(row)]</span><br><span class="line"></span><br><span class="line">for i in range(n):</span><br><span class="line">	for j in range(1,n):</span><br><span class="line">		if str1[i] &#x3D;&#x3D; str2[j]:</span><br><span class="line">			dp[i][j] &#x3D; dp[i][j] + ...</span><br><span class="line">		else:</span><br><span class="line">			dp[i][j] &#x3D; 最值(...)</span><br></pre></td></tr></table></figure>
+<p>上述的二维模板既可以用在两个字符串或者一个字符串的情况。用于两个字符串时，dp[i][j]表示我们所要求的公共子序列的长度；而用于一个字符串时，表示所要求的子序列的长度。</p>
+<p>利用上述模板，可以解决<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/longest-palindromic-subsequence/">#516. 最长回文子序列</a>问题。问题描述如下：</p>
+<blockquote>
+<p>给定一个字符串 s ，找到其中最长的回文子序列，并返回该序列的长度。可以假设 s 的最大长度为 1000 。</p>
+</blockquote>
+<p>对于这种题目如果能画出二维状态转移图，可以更有利于理解。上述题目的代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def longestPalindromeSubseq(self, s: str) -&gt; int:</span><br><span class="line">        lens &#x3D; len(s)</span><br><span class="line">        dp &#x3D; [[0 for _ in range(lens)] for _ in range(lens)]</span><br><span class="line"></span><br><span class="line">        for i in range(lens):</span><br><span class="line">            dp[i][i] &#x3D; 1</span><br><span class="line"></span><br><span class="line">        for i in range(lens-1, -1, -1):</span><br><span class="line">            for j in range(i+1, lens):</span><br><span class="line">                if s[i] &#x3D;&#x3D; s[j]:</span><br><span class="line">                    dp[i][j] &#x3D; dp[i+1][j-1]+2</span><br><span class="line">                else:</span><br><span class="line">                    dp[i][j] &#x3D; max(dp[i][j-1], dp[i+1][j])</span><br><span class="line"></span><br><span class="line">        return dp[0][lens-1]</span><br></pre></td></tr></table></figure>
+<p>注意由于这里存在着i和j的位置约束，所以部分位置的逻辑需要计算i+1。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/22/LeetCode-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%A5%97%E8%B7%AF%E2%91%A1-%E5%AD%90%E5%BA%8F%E5%88%97%E7%B1%BB%E5%9E%8B%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-12-22T02:21:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/22/LeetCode-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%A5%97%E8%B7%AF%E2%91%A1-%E5%AD%90%E5%BA%8F%E5%88%97%E7%B1%BB%E5%9E%8B%E9%97%AE%E9%A2%98/">[LeetCode]动态规划的基本套路②--子序列类型问题</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/22/LeetCode-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%A5%97%E8%B7%AF%E2%91%A0-%E6%80%BB%E8%A7%88/" class="archive-article-date">
-  	<time datetime="2020-12-22T01:35:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-22</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2020/12/22/LeetCode-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%A5%97%E8%B7%AF%E2%91%A0-%E6%80%BB%E8%A7%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">[LeetCode]动态规划的基本套路①--总览</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/22/LeetCode-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%A5%97%E8%B7%AF%E2%91%A0-%E6%80%BB%E8%A7%88/">[LeetCode]动态规划的基本套路①--总览</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/12/21/LeetCode-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%A5%97%E8%B7%AF/" class="archive-article-date">
-  	<time datetime="2020-12-21T12:56:35.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-12-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/12/21/LeetCode-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%AE%97%E6%B3%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%A5%97%E8%B7%AF/">[LeetCode]滑动窗口算法的基本套路</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -259,8 +349,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
