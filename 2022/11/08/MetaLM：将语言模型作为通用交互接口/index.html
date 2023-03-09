@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>MetaLM：将语言模型作为通用交互接口 - 张睿 | 智能对话、AIGC、自然语言处理</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="张睿 | 智能对话、AIGC、自然语言处理"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="张睿 | 智能对话、AIGC、自然语言处理"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="MetaLM建议使用LM作为各种基础模型的通用接口。其中，一组预先训练的编码器可以感知不同模态的输入，他们与一个扮演通用任务层角色的LM进行对接。论文提出一个半因果语言建模目标来联合预训练接口（Decoder）和模块化编码器（Encoder），从而结合因果模型和非因果模型的优势。具体而言，因果语言模型具有Context学习和开放式生成能力；而非因果模型采用了双向编码器，有利于微调。  （一）设计原"><meta property="og:type" content="article"><meta property="og:title" content="MetaLM：将语言模型作为通用交互接口"><meta property="og:url" content="http://ruizhangchn.github.io/2022/11/08/MetaLM%EF%BC%9A%E5%B0%86%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%BD%9C%E4%B8%BA%E9%80%9A%E7%94%A8%E4%BA%A4%E4%BA%92%E6%8E%A5%E5%8F%A3/"><meta property="og:site_name" content="张睿 | 智能对话、AIGC、自然语言处理"><meta property="og:description" content="MetaLM建议使用LM作为各种基础模型的通用接口。其中，一组预先训练的编码器可以感知不同模态的输入，他们与一个扮演通用任务层角色的LM进行对接。论文提出一个半因果语言建模目标来联合预训练接口（Decoder）和模块化编码器（Encoder），从而结合因果模型和非因果模型的优势。具体而言，因果语言模型具有Context学习和开放式生成能力；而非因果模型采用了双向编码器，有利于微调。  （一）设计原"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://ruizhangchn.github.io/imgs/blogs/221108_pic1.png"><meta property="og:image" content="http://ruizhangchn.github.io/imgs/blogs/221108_pic2.png"><meta property="og:image" content="http://ruizhangchn.github.io/imgs/blogs/221108_pic3.png"><meta property="og:image" content="http://ruizhangchn.github.io/imgs/blogs/221108_pic4.jpeg"><meta property="og:image" content="http://ruizhangchn.github.io/imgs/blogs/221108_pic5.png"><meta property="og:image" content="http://ruizhangchn.github.io/imgs/blogs/221108_pic6.png"><meta property="article:published_time" content="2022-11-08T11:35:52.000Z"><meta property="article:modified_time" content="2023-03-09T07:50:20.706Z"><meta property="article:author" content="Rui Zhang"><meta property="article:tag" content="LLM"><meta property="article:tag" content="NLP"><meta property="article:tag" content="智能对话"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://ruizhangchn.github.io/imgs/blogs/221108_pic1.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://ruizhangchn.github.io/2022/11/08/MetaLM%EF%BC%9A%E5%B0%86%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%BD%9C%E4%B8%BA%E9%80%9A%E7%94%A8%E4%BA%A4%E4%BA%92%E6%8E%A5%E5%8F%A3/"},"headline":"MetaLM：将语言模型作为通用交互接口","image":["http://ruizhangchn.github.io/imgs/blogs/221108_pic1.png","http://ruizhangchn.github.io/imgs/blogs/221108_pic2.png","http://ruizhangchn.github.io/imgs/blogs/221108_pic3.png","http://ruizhangchn.github.io/imgs/blogs/221108_pic5.png","http://ruizhangchn.github.io/imgs/blogs/221108_pic6.png"],"datePublished":"2022-11-08T11:35:52.000Z","dateModified":"2023-03-09T07:50:20.706Z","author":{"@type":"Person","name":"Rui Zhang"},"publisher":{"@type":"Organization","name":"张睿 | 智能对话、AIGC、自然语言处理","logo":{"@type":"ImageObject","url":"http://ruizhangchn.github.io/img/logo.svg"}},"description":"MetaLM建议使用LM作为各种基础模型的通用接口。其中，一组预先训练的编码器可以感知不同模态的输入，他们与一个扮演通用任务层角色的LM进行对接。论文提出一个半因果语言建模目标来联合预训练接口（Decoder）和模块化编码器（Encoder），从而结合因果模型和非因果模型的优势。具体而言，因果语言模型具有Context学习和开放式生成能力；而非因果模型采用了双向编码器，有利于微调。  （一）设计原"}</script><link rel="canonical" href="http://ruizhangchn.github.io/2022/11/08/MetaLM%EF%BC%9A%E5%B0%86%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B%E4%BD%9C%E4%B8%BA%E9%80%9A%E7%94%A8%E4%BA%A4%E4%BA%92%E6%8E%A5%E5%8F%A3/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="张睿 | 智能对话、AIGC、自然语言处理" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/archives">博客</a><a class="navbar-item" href="/papers">论文&amp;项目</a><a class="navbar-item" href="/about">关于我</a></div><div class="navbar-end"><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-11-08T11:35:52.000Z" title="2022/11/8 下午7:35:52">2022-11-08</time>发表</span><span class="level-item"><time dateTime="2023-03-09T07:50:20.706Z" title="2023/3/9 下午3:50:20">2023-03-09</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/">自然语言处理</a></span><span class="level-item">14 分钟读完 (大约2088个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">MetaLM：将语言模型作为通用交互接口</h1><div class="content"><p>MetaLM建议使用LM作为各种基础模型的通用接口。其中，一组预先训练的编码器可以感知不同模态的输入，他们与一个扮演通用任务层角色的LM进行对接。论文提出一个<strong>半因果语言建模</strong>目标来联合预训练接口（Decoder）和模块化编码器（Encoder），从而结合因果模型和非因果模型的优势。具体而言，因果语言模型具有Context学习和开放式生成能力；而非因果模型采用了双向编码器，有利于微调。</p>
+<p><img src="/imgs/blogs/221108_pic1.png" alt="图1 - 使用LM作为各种基础模型的通用接口"></p>
+<h3 id="（一）设计原则"><a href="#（一）设计原则" class="headerlink" title="（一）设计原则"></a>（一）设计原则</h3><ul>
+<li><strong>将语言模型作为通用任务层</strong>：LM可以作为语言&#x2F;视觉&#x2F;多模态任务的通用接口，因为其具有开放的输出空间，可以推广到广泛任务。此外，借助通用任务层，预测过程可以超越单一任务，在LM的基础上，基于历史上下文建立多轮对话接口。</li>
+<li><strong>因果语言建模（即单向解码器）有利于zero-shot泛化和上下文学习</strong>：因果语言建模相比于MLM有良好的样本效率和诱导偏差，因此可以通过因果建模提高在few-shot场景的效果。同时，上下文学习时的能够轻松地调整预训练模型或微调模型来适应新的场景。</li>
+<li><strong>非因果建模（即双向编码器）有利于跨任务、跨语言和跨模态</strong>：通过MLM预先训练的双向编码器可以获得更好的微调性能，一旦给出全部输入，非因果模型能够合理地编码数据，因为所有的上下文都可以被相互访问，而因果建模只能逐个使用历史标记。微调的优势对于有丰富标注数据的任务很有帮助。此外，使用MLM目标预训练的非因果编码器在跨语言迁移方面有更好的表现。</li>
+<li><strong>半因果语言建模作为元预训练任务</strong>：半因果语言模型起着将非因果编码器和因果语言模型连接在一起的作用。从通用接口预训练的意义上讲，它是一个元任务。具体而言，非因果编码器学习各种输入数据的表示，而因果解码器充当通用任务层。相比于前缀语言模型或者T5，MetaLM非因果地编码整个序列的随机跨度，而使用因果解码器生成剩余的部分。此外，在架构上，直接将非因果编码器的输出给输入到因果解码器中，而不是依赖于交叉注意力。最后，因果解码器可以安装多个双向编码器，而传统的Encoder-Decoder通常只能有一个编码器。</li>
+<li><strong>非因果编码器作为系统1，因果语言模型作为系统2</strong>：认知通常分为两个层次-系统1（直觉和无意识）和系统2（顺序、有意识、计划和推理）。可以认为所提出的框架包含了这两个级别的实现。在使用非因果编码器进行输入表示后，利用因果模型作为系统2来进行常识推理和规划任务。</li>
+<li><strong>用户和预训练模型之间的自然语言接口</strong>：基于因果建模的通用任务层使得用户能够用自然语言与预先训练的非因果编码器进行交互。首先，语言可以作为底层预训练或微调模型的编程语言（例如，可以编写基于文本的指令和解释来重新定位和指导模型行为）。其次，通用接口使得模型能够使用自由文本展示结果，期预测更加可以理解和解释。最后，上述框架支持多轮对话交互。</li>
+</ul>
+<p>###（二）MetaLM</p>
+<p>MetaLM的框架如图2所示。具体而言，一组经过预训练的能够感知不同模态的编码器将与语言模型对接，而语言模型则担任通用任务接口，将各类任务统一为自由文本生成。为了预训练MetaLM，采用半因果语言建模任务联合学习上述模块。<br><img src="/imgs/blogs/221108_pic2.png" alt="图2 - MetaLM模型架构"></p>
+<h4 id="2-1-输入表示"><a href="#2-1-输入表示" class="headerlink" title="2.1 输入表示"></a>2.1 输入表示</h4><p>MetaLM的输入表示分为两类：</p>
+<ul>
+<li>一类是由底层编码器获得的上下文表示，然后由一个connector层进行投影。如图2中的图片块和x7,x8采用双向视觉文本编码器编码。</li>
+<li>另一类是文本的token embedding。如图2中的x5,x6。</li>
+</ul>
+<p>在传递到通用接口之前，这两种类别的表示是利用position embedding来加和的。</p>
+<h4 id="2-2-模型架构"><a href="#2-2-模型架构" class="headerlink" title="2.2 模型架构"></a>2.2 模型架构</h4><p><img src="/imgs/blogs/221108_pic3.png" alt="图3 - 四种不同类型的LM架构"></p>
+<p>图3展示了四种不同类型的LM架构，MetaLM采用的是架构(d)。在因果模型和非因果编码器之间，采用connector进行投影，使得基础模型的输出尺寸能够与通用任务层相匹配。</p>
+<h3 id="2-3-半因果语言建模目标"><a href="#2-3-半因果语言建模目标" class="headerlink" title="2.3 半因果语言建模目标"></a>2.3 半因果语言建模目标</h3><p>为了对MetaLM进行预训练，文章引入了semi-causal语言建模目标。如图2所示，预训练目标自回归地（单向地）生成token序列，而其中的某些span则采用双向编码器来表示。</p>
+<p>给定一个输入序列x&#x3D;{x_1, x_2, …, x_n}，假定其中包含k个非因果span。对于每个非因果span，采用双向编码器获得其向量表示。这里需要基于非因果span的具体模态选取双向编码器。随后，模型就可以利用下面的半因果语言模型目标进行训练。对于每个非因果span，模型只在最后一个span位置进行相应的生成。</p>
+<p><img src="/imgs/blogs/221108_pic4.jpeg" alt="图4 - semi-casual语言建模目标"></p>
+<h3 id="（三）纯文本任务和视觉-文本任务实验"><a href="#（三）纯文本任务和视觉-文本任务实验" class="headerlink" title="（三）纯文本任务和视觉-文本任务实验"></a>（三）纯文本任务和视觉-文本任务实验</h3><p>实验部分比较多，就不展开了，具体可以查看原文实验部分。实验主要分为纯文本任务(图5)和视觉-文本任务(图6)。</p>
+<p><img src="/imgs/blogs/221108_pic5.png" alt="图5 - MetaLM在不同纯文本任务上的使用"></p>
+<p>其中，纯文本任务可以分为以下几种：</p>
+<ul>
+<li>Multitask Learning &#x2F; Instruction Tuning: 类似于前缀Prompting的形式，Context和Prompt Template都使用非因果编码器编码，然后使用SCLM进行解码；</li>
+<li>Multi-Turn Dialogue: 多轮对话，使用非因果编码器编码用户输入，用SCLM解码系统响应；</li>
+<li>Zero-Shot Priming: 直接询问模型一些知识问题，采用非因果编码器编码查询；</li>
+<li>In-Context Learning: 类似于带example的前缀prompting方法。</li>
+</ul>
+<p><img src="/imgs/blogs/221108_pic6.png" alt="图6 - MetaLM在不同视觉-文本任务上的应用"></p>
+<p>视觉-文本任务主要包括以下几种：</p>
+<p>Zero-shot Priming: 类似于Prompting的方法；<br>Few-shot Learning: 类似于带example的前缀Prompting方法；<br>Finetuning: 与Zero-shot Priming相似，模型学习方式不同；<br>Multi-turn Dialogue: 支持多种模态的多轮对话；<br>Finetuning with Explanations: 带解释实例的生成。</p>
+<h3 id="（四）结论"><a href="#（四）结论" class="headerlink" title="（四）结论"></a>（四）结论</h3><p>文章提出了一种通用的语言大模型，可以将不同模态的任务通过非因果编码器和因果解码器结合，从而实现对不同类型的任务进行学习。实验结果表明，上述方法相比于GPT模型，在多项文本任务上取得了显著的性能提升，并且具有更加通用的任务解决能力。</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p>[1] Hao Y, Song H, Dong L, et al. Language models are general-purpose interfaces[J]. arXiv preprint arXiv:2206.06336, 2022. </p>
+</div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/LLM/">LLM</a><a class="link-muted mr-2" rel="tag" href="/tags/NLP/">NLP</a><a class="link-muted mr-2" rel="tag" href="/tags/%E6%99%BA%E8%83%BD%E5%AF%B9%E8%AF%9D/">智能对话</a></div></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2022/11/11/BlenderBot3-%E6%8C%81%E7%BB%AD%E5%8F%82%E4%B8%8E%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%AF%B9%E8%AF%9D%E4%BB%A3%E7%90%86/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">BlenderBot3: 持续参与学习的对话代理</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2021/10/28/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%9A%84%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90/"><span class="level-item">深度强化学习算法的需求分析</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/imgs/zhang2.jpg" alt="张睿"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">张睿</p><p class="is-size-6 is-block">博士 / 算法研究员 / 高级工程师</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>华为技术有限公司·深圳</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">12</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">17</p></a></div></div></nav><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/RuiZhangCHN"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Google Scholar" href="https://scholar.google.com/citations?user=Cn70dv8AAAAJ"><i class="fab fa-google"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/"><span class="level-start"><span class="level-item">强化学习</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"><span class="level-start"><span class="level-item">机器学习</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">自然语言处理</span></span><span class="level-end"><span class="level-item tag">7</span></span></a></li><li><a class="level is-mobile" href="/categories/%E8%AE%BA%E6%96%87%E9%80%9F%E9%80%92/"><span class="level-start"><span class="level-item">论文速递</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-02-16T13:48:39.000Z">2023-02-16</time></p><p class="title"><a href="/2023/02/16/%E3%80%90%E8%AE%BA%E6%96%87%E3%80%91Knowledge-augmented-Frame-Semantic-Parsing-with-Hybrid-Prompt-tuning/">【论文】Knowledge-augmented Frame Semantic Parsing with Hybrid Prompt-tuning</a></p><p class="categories"><a href="/categories/%E8%AE%BA%E6%96%87%E9%80%9F%E9%80%92/">论文速递</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-01-20T13:49:04.000Z">2023-01-20</time></p><p class="title"><a href="/2023/01/20/%E5%A6%82%E4%BD%95%E4%BF%AE%E6%AD%A3%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%94%99%E8%AF%AF%E4%BF%A1%E5%BF%B5/">如何修正大模型的错误信念</a></p><p class="categories"><a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/">自然语言处理</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-01-12T02:43:22.000Z">2023-01-12</time></p><p class="title"><a href="/2023/01/12/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%BA%E5%A4%A7%E7%9A%84In-Context-Learning/">什么是强大的In-Context Learning</a></p><p class="categories"><a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/">自然语言处理</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-01-10T11:09:27.000Z">2023-01-10</time></p><p class="title"><a href="/2023/01/10/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E4%B9%8B%E8%B7%AF%EF%BC%9A%E6%8F%90%E7%A4%BA%E5%AD%A6%E4%B9%A0-%E6%80%9D%E7%BB%B4%E9%93%BE/">大模型推理之路：提示学习+思维链</a></p><p class="categories"><a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/">自然语言处理</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-11-13T08:12:10.000Z">2022-11-13</time></p><p class="title"><a href="/2022/11/13/%E8%B0%B7%E6%AD%8CLaMDA%E6%A8%A1%E5%9E%8B/">谷歌LaMDA模型</a></p><p class="categories"><a href="/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/">自然语言处理</a></p></div></article></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="张睿 | 智能对话、AIGC、自然语言处理" height="28"></a><p class="is-size-7"><span>&copy; 2023 Rui Zhang</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
